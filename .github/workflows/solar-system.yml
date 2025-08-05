@@ -45,6 +45,9 @@ jobs:
             path: test-results.xml
     docker:
       name: docker
+      needs:
+       - code-coverage
+       - unit-testing
       runs-on: ubuntu-latest
       steps:
         - name: checkout
