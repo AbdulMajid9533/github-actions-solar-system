@@ -43,6 +43,24 @@ jobs:
           with:
             name: Mocha-Test-Result
             path: test-results.xml
+    docker:
+      name: docker
+      runs-on: ubuntu-latest
+      steps:
+        - name: checkout
+          uses: actions/checkout@v4
+        - name: docker login
+          uses: docker/login-action
+          with:
+            registry: ghcr.io
+            username: ${{ github.repository_owner }}
+            password: ${{ secrets.PASSWORDTOKEN }}
+        - name: build and publish
+          uses: docker/build-push-action
+          with:
+            context: .
+            push: true
+            tags: ghcr.io/${{ github.repository_owner }}/solar-system:${{ github.sha}}
     code-coverage:
       name: code-coverage
       runs-on: ubuntu-latest
@@ -66,3 +84,4 @@ jobs:
             name: Code-Coverage-Result
             path: coverage
             retention-days: 5
+
