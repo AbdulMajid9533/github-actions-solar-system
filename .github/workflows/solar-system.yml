@@ -72,7 +72,9 @@ jobs:
        steps:
         - uses: actions/checkout@v4
         - name: Install Kubectl
-          uses: azure/setup-kubectl@v1.28.1
+          uses: azure/setup-kubectl
+          with:
+            kube-version: v1.28.1
         - uses: azure/k8s-set-context@v4
           with:
             method: kubeconfig
