@@ -79,7 +79,7 @@ jobs:
           with:
             method: kubeconfig
             kubeconfig: '${{ secrets.KUBECONFIG }}'
-        - name: kubectl version
+        - name: kubectl versionn
           run: kubectl version -o yaml
     code-coverage:
       name: code-coverage
