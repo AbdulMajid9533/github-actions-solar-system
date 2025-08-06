@@ -64,6 +64,19 @@ jobs:
             context: .
             push: true
             tags: 'ghcr.io/abdulmajid9533/solar-system:${{ github.sha}}'
+    dev-deploy:
+       needs: docker
+       runs-on: ubuntu-latest
+       environment:
+        name: development
+       steps:
+        - uses: actions/checkout@v4
+        - name: Install Kubectl
+          uses: azure/setup-kubectl@v1.28.1
+        - uses: azure/k8s-set-context@v4
+          with:
+            method: kubeconfig
+            kubeconfig: ''${{ secrets.KUBECONFIG }}''
     code-coverage:
       name: code-coverage
       runs-on: ubuntu-latest
@@ -87,4 +100,6 @@ jobs:
             name: Code-Coverage-Result
             path: coverage
             retention-days: 5
+
+
 
