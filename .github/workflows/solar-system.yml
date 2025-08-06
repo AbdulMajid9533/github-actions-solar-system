@@ -75,12 +75,13 @@ jobs:
           uses: azure/setup-kubectl@v4
           with:
             version: v1.28.1
-        - uses: azure/k8s-set-context@v4
+        - uses: azure/k8s-set-context@v3
           with:
             method: kubeconfig
             kubeconfig: '${{ secrets.KUBECONFIG }}'
         - name: kubectl version
           run: kubectl version -o yaml
+
     code-coverage:
       name: code-coverage
       runs-on: ubuntu-latest
@@ -104,6 +105,8 @@ jobs:
             name: Code-Coverage-Result
             path: coverage
             retention-days: 5
+
+
 
 
 
